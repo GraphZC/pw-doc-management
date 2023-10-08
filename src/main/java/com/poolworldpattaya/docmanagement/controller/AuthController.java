@@ -3,7 +3,6 @@ package com.poolworldpattaya.docmanagement.controller;
 import com.poolworldpattaya.docmanagement.entity.Employee;
 import com.poolworldpattaya.docmanagement.request.LoginRequest;
 import com.poolworldpattaya.docmanagement.service.AuthService;
-import com.poolworldpattaya.docmanagement.service.EmployeeService;
 import com.poolworldpattaya.docmanagement.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,11 +22,6 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @PostMapping("/test")
-    public String test() {
-        return "test";
-    }
 
     @PostMapping("/create")
     public String addNewUser(@RequestBody Employee userInfo) {
