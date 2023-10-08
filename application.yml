@@ -1,0 +1,16 @@
+server:
+  port: 9000
+spring:
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose.yml
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
