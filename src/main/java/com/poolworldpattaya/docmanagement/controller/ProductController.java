@@ -54,8 +54,8 @@ public class ProductController {
         return "redirect:/products";
     }
     @PostMapping("/edit/{id}")
-    public String updateProduct(@PathVariable UUID id,@RequestBody ProductRequest product, Model model) {
-        productService.updateProduct(id,product);
+    public String updateProduct(@RequestBody ProductRequest product) {
+        productService.updateProduct(product);
         return "redirect:/products";
     }
 }

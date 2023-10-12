@@ -17,6 +17,6 @@ public class Product {
     private String code;
     private String name;
     private String description;
-    private Double price;
-    private int unit;
+    private double price;
+    private String unit;
 }

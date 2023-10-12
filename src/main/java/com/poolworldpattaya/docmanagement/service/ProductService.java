@@ -29,24 +29,24 @@ public class ProductService {
 
     public void createProduct(ProductRequest product) {
         Product record = modelMapper.map(product, Product.class);
-        if (product.getCode().equals("")){
-            record.setCode("-");
-        }if (product.getDescription().equals("")) {
-            record.setDescription("-");
-        }
+//        if (product.getCode().equals(null)){
+//            record.setCode("-");
+//        }if (product.getDescription().equals(null)) {
+//            record.setDescription("-");
+//        }
         productRepository.save(record);
     }
     public void deleteProduct(UUID id) {
         productRepository.deleteById(id);
 
     }
-    public void updateProduct(@PathVariable UUID id, ProductRequest product){
+    public void updateProduct(ProductRequest product){
         Product record = modelMapper.map(product, Product.class);
-        if (product.getCode().equals("")){
-            record.setCode("-");
-        }if (product.getDescription().equals("")) {
-            record.setDescription("-");
-        }
+//        if (product.getCode().equals(null)){
+//            record.setCode("-");
+//        }if (product.getDescription().equals(null)) {
+//            record.setDescription("-");
+//        }
         productRepository.save(record);
     }
 }
