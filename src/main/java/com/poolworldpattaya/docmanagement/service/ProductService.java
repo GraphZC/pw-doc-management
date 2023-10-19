@@ -5,6 +5,9 @@ import com.poolworldpattaya.docmanagement.repository.ProductRepository;
 import com.poolworldpattaya.docmanagement.request.ProductRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,8 +22,13 @@ public class ProductService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+//    public List<Product> getAllProducts() {
+//        return productRepository.findAll();
+//    }
+
+    public Page<Product> getPageProducts(int page, int size) {
+        Pageable pageRequest = PageRequest.of(page, size);
+        return productRepository.findAll(pageRequest);
     }
 
     public Product getOneById(UUID id) {
