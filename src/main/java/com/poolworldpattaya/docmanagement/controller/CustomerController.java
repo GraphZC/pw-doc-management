@@ -74,7 +74,7 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @GetMapping("/api/v1/customers")
+    @GetMapping
     public String getCustomers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, Model model) {
         List<Integer> pageSizes = Arrays.asList(10,25,50,100) ;
         Page<Customer> customerPage = customerService.getPageCustomers(page, size);
