@@ -5,12 +5,13 @@ import com.poolworldpattaya.docmanagement.repository.CustomerRepository;
 import com.poolworldpattaya.docmanagement.request.CustomerRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,9 +30,9 @@ public class CustomerService {
         return customerRepository.findById(id).get();
     }
 
-    public Customer getOneByName(String name){
-        return customerRepository.findByName(name);
-    }
+//    public Customer getOneByName(String name){
+//        return customerRepository.findByName(name);
+//    }
 
     public void createCustomer(CustomerRequest customer) {
         Customer record = modelMapper.map(customer, Customer.class);
@@ -46,5 +47,13 @@ public class CustomerService {
         Customer record = modelMapper.map(customer ,Customer.class);
         customerRepository.save(record);
     }
+
+    public Page<Customer> getPageCustomers(int page, int size) {
+        Pageable pageRequest = PageRequest.of(page, size);
+        return customerRepository.findAll(pageRequest);
+    }
+
+
+
 
 }
