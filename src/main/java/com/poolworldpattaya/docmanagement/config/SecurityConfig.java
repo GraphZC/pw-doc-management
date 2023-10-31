@@ -39,19 +39,19 @@ public class SecurityConfig {
         http
                 .csrf(
                     AbstractHttpConfigurer::disable
-                );
-//                .authorizeHttpRequests((requests) -> requests
-//                    .requestMatchers(new AntPathRequestMatcher("/api/v1/health/**")).permitAll()
-//                    .requestMatchers(new AntPathRequestMatcher("/api/v1/auth/**")).permitAll()
-//                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
-//                    .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-//                    .anyRequest().authenticated()
-//                )
-//                .sessionManagement((session) -> session
-//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
-//                .authenticationProvider(authenticationProvider())
-//                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+                )
+                .authorizeHttpRequests((requests) -> requests
+                    .requestMatchers(new AntPathRequestMatcher("/api/v1/health/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/api/v1/auth/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                    .anyRequest().authenticated()
+                )
+                .sessionManagement((session) -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

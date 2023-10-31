@@ -23,4 +23,8 @@ public class EmployeeService implements UserDetailsService {
         return userDetail.map(EmployeeDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
     }
+
+    public Employee getByUsername(String username) {
+        return repository.findByUsername(username);
+    }
 }
