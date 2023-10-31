@@ -1,6 +1,8 @@
 package com.poolworldpattaya.docmanagement.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.util.UUID;
@@ -8,9 +10,11 @@ import java.util.UUID;
 @Data
 @Entity
 public class Customer {
-    private UUID Id;
-    private String customerCode;
-    private String customerName;
-    private double price;
-    private String unit;
+    @Id
+    @GeneratedValue
+    private UUID id;
+    private String name;
+    private String address;
+    private String telephone;
+    private String taxId;
 }
