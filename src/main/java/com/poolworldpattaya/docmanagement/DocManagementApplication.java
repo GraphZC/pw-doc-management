@@ -18,12 +18,13 @@ public class DocManagementApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*")
+                System.out.println("addCorsMappings");
+                registry.addMapping("/api/v1/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "OPTIONS", "PUT", "DELETE")
                         .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
                         .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-                        .allowCredentials(true)
+                        .allowCredentials(false)
                         .maxAge(3600);
             }
         };
