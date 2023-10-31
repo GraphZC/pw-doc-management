@@ -1,19 +1,26 @@
 package com.poolworldpattaya.docmanagement.request;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRequest {
-    private UUID Id;
-    private String name;
+public class EditProductRequest {
+    @Column(nullable = true)
     private String code;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = true)
     private String description;
+
+    @Column(nullable = false)
     private double price;
+
+    @Column(nullable = false)
     private String unit;
 }
