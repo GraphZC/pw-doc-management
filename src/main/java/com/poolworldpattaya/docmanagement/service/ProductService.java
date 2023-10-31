@@ -22,14 +22,14 @@ public class ProductService {
     @Autowired
     private ModelMapper modelMapper;
 
-//    public List<Product> getAllProducts() {
-//        return productRepository.findAll();
-//    }
-
-    public Page<Product> getPageProducts(int page, int size) {
-        Pageable pageRequest = PageRequest.of(page, size);
-        return productRepository.findAll(pageRequest);
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
+
+//    public Page<Product> getPageProducts(int page, int size) {
+//        Pageable pageRequest = PageRequest.of(page, size);
+//        return productRepository.findAll(pageRequest);
+//    }
 
     public Product getOneById(UUID id) {
         return productRepository.findById(id).get();
@@ -37,11 +37,6 @@ public class ProductService {
 
     public void createProduct(ProductRequest product) {
         Product record = modelMapper.map(product, Product.class);
-//        if (product.getCode().equals(null)){
-//            record.setCode("-");
-//        }if (product.getDescription().equals(null)) {
-//            record.setDescription("-");
-//        }
         productRepository.save(record);
     }
     public void deleteProduct(UUID id) {
@@ -50,11 +45,6 @@ public class ProductService {
     }
     public void updateProduct(ProductRequest product){
         Product record = modelMapper.map(product, Product.class);
-//        if (product.getCode().equals(null)){
-//            record.setCode("-");
-//        }if (product.getDescription().equals(null)) {
-//            record.setDescription("-");
-//        }
         productRepository.save(record);
     }
 }

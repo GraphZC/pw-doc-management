@@ -27,19 +27,19 @@ public class ProductController {
     public String test() {
         return "test";
     }
-//    @GetMapping
-//    public String getAllProducts(Model model) {
-//        model.addAttribute("products", productService.getAllProducts());
-//        return "product-all";
-//    }
     @GetMapping
-    public String getProducts(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, Model model) {
-        List<Integer> pageSizes = Arrays.asList(10, 25, 50, 100);
-        Page<Product> productPage = productService.getPageProducts(page, size);
-        model.addAttribute("productPage", productPage);
-        model.addAttribute("pageSizes", pageSizes);
+    public String getAllProducts(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
         return "product-all";
     }
+//    @GetMapping
+//    public String getProducts(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, Model model) {
+//        List<Integer> pageSizes = Arrays.asList(10, 25, 50, 100);
+//        Page<Product> productPage = productService.getPageProducts(page, size);
+//        model.addAttribute("productPage", productPage);
+//        model.addAttribute("pageSizes", pageSizes);
+//        return "product-all";
+//    }
 
     @GetMapping("/edit/{id}")
     public String getOneProduct(@PathVariable UUID id, Model model) {
