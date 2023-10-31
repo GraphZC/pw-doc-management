@@ -1,6 +1,7 @@
 package com.poolworldpattaya.docmanagement.controller;
 
 import com.poolworldpattaya.docmanagement.entity.Customer;
+import com.poolworldpattaya.docmanagement.request.CreateCustomerRequest;
 import com.poolworldpattaya.docmanagement.request.EditCustomerRequest;
 import com.poolworldpattaya.docmanagement.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,8 +34,15 @@ public class CustomerController {
     @PostMapping("/")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer newCustomer = customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@RequestBody CreateCustomerRequest customer) {
+        Customer newCustomer = new Customer();
+        newCustomer.setName(customer.getName());
+        newCustomer.setAddress(customer.getAddress());
+        newCustomer.setTelephone(customer.getTelephone());
+        newCustomer.setTaxId(customer.getTaxId());
+
+        // Create customer
+        newCustomer = customerService.createCustomer(newCustomer);
         return ResponseEntity.created(null).body(newCustomer);
     }
 
