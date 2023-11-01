@@ -1,20 +1,14 @@
-package com.poolworldpattaya.docmanagement.entity;
+package com.poolworldpattaya.docmanagement.request;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.UUID;
+import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue
-    private UUID id;
-
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateProductRequest {
     @Column(nullable = true)
     private String code;
 

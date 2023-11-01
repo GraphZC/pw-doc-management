@@ -2,14 +2,9 @@ package com.poolworldpattaya.docmanagement.service;
 
 import com.poolworldpattaya.docmanagement.entity.Product;
 import com.poolworldpattaya.docmanagement.repository.ProductRepository;
-import com.poolworldpattaya.docmanagement.request.ProductRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,32 +14,36 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
 
-//    public Page<Product> getPageProducts(int page, int size) {
-//        Pageable pageRequest = PageRequest.of(page, size);
-//        return productRepository.findAll(pageRequest);
-//    }
-
-    public Product getOneById(UUID id) {
+    public Product getProductById(UUID id) {
         return productRepository.findById(id).get();
     }
 
-    public void createProduct(ProductRequest product) {
-        Product record = modelMapper.map(product, Product.class);
-        productRepository.save(record);
+    public Product createProduct(Product product) {
+        productRepository.save(product);
+        return product;
     }
-    public void deleteProduct(UUID id) {
-        productRepository.deleteById(id);
 
+    public Product deleteProduct(UUID id) {
+        Product product = productRepository.findById(id).get();
+        productRepository.deleteById(id);
+        return product;
     }
-    public void updateProduct(ProductRequest product){
-        Product record = modelMapper.map(product, Product.class);
+
+    public Product updateProduct(Product product){
+        UUID id = product.getId();
+
+        Product record = productRepository.findById(id).get();
+        record.setCode(product.getCode());
+        record.setName(product.getName());
+        record.setDescription(product.getDescription());
+        record.setPrice(product.getPrice());
+        record.setUnit(product.getUnit());
+
         productRepository.save(record);
+        return record;
     }
 }
