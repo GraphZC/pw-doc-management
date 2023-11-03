@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
 	@GetMapping("/test")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public String test() {
 		return "test";
 	}

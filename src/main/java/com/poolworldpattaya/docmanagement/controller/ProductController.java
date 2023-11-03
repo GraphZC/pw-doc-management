@@ -23,7 +23,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Product> getOneProduct(@PathVariable UUID id) {
         Product product = productService.getProductById(id);
         if (product == null) {
@@ -34,7 +33,6 @@ public class ProductController {
 
     @PostMapping("/")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest product) {
         Product newProduct = new Product();
         newProduct.setCode(product.getCode());
@@ -50,7 +48,6 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody EditProductRequest product) {
         // Find product by id
         Product record = productService.getProductById(id);
@@ -76,7 +73,6 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Product> deleteProduct(@PathVariable UUID id) {
         // Find product by id
         Product product = productService.getProductById(id);
@@ -90,7 +86,6 @@ public class ProductController {
 
     @GetMapping("/")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<List<Product>> getProducts() {
         List<Product> products = productService.getAllProduct();
 

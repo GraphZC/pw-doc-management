@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
-    public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
+    public static final String SECRET = "V5kUejQRDeou+uwyigydKakald3b6lIOqqOwS8sJgLi5rizoSUM5fkIT7CMtrqMg8rQCqi4hbFL1iaaSMKXBSw==";
     public String generateAccessToken(String userName, String role, String name) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);

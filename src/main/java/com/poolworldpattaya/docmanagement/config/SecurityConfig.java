@@ -28,6 +28,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @EnableWebSecurity
 @Configuration
 @EnableMethodSecurity
@@ -44,7 +46,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://localhost:9000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4000", "http://localhost:9000"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
@@ -55,7 +57,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
+                .cors(withDefaults())
                 .csrf(
                     AbstractHttpConfigurer::disable
                 )
@@ -64,7 +66,7 @@ public class SecurityConfig {
                     .requestMatchers(new AntPathRequestMatcher("/api/v1/auth/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 )
                 .sessionManagement((session) -> session
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

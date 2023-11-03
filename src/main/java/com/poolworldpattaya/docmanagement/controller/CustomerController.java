@@ -22,7 +22,6 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Customer> getOneCustomer(@PathVariable UUID id) {
         Customer customer = customerService.getCustomerById(id);
         if (customer == null) {
@@ -33,7 +32,6 @@ public class CustomerController {
 
     @PostMapping("/")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Customer> createCustomer(@RequestBody CreateCustomerRequest customer) {
         Customer newCustomer = new Customer();
         newCustomer.setName(customer.getName());
@@ -48,7 +46,6 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Customer> updateCustomer(@PathVariable UUID id, @RequestBody EditCustomerRequest customer) {
         // Find customer by id
         Customer record = customerService.getCustomerById(id);
@@ -74,7 +71,6 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Customer> deleteCustomer(@PathVariable UUID id) {
         // Find customer by id
         Customer customer = customerService.getCustomerById(id);
@@ -88,7 +84,6 @@ public class CustomerController {
 
     @GetMapping("/")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<List<Customer>> getCustomers() {
         List<Customer> customers = customerService.getAllCustomer();
 
