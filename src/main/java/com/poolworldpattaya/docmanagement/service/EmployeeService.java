@@ -53,9 +53,9 @@ public class EmployeeService implements UserDetailsService {
     public Employee updateEmployee(Employee employee) {
         UUID id = employee.getId();
 
-        Customer record = employeeRepository.findById(id).get();
+        Employee record = employeeRepository.findById(id).get();
         record.setName(employee.getName());
-        record.setAddress(employee.getPassword());
+        record.setPassword(employee.getPassword());
         employeeRepository.save(record);
         return record;
     }
