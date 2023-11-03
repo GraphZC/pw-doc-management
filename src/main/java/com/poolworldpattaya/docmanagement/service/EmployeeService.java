@@ -1,6 +1,5 @@
 package com.poolworldpattaya.docmanagement.service;
 
-import com.poolworldpattaya.docmanagement.entity.Customer;
 import com.poolworldpattaya.docmanagement.entity.Employee;
 import com.poolworldpattaya.docmanagement.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
