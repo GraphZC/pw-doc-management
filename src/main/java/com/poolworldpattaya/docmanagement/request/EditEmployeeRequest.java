@@ -16,4 +16,7 @@ public class EditEmployeeRequest {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
 }
