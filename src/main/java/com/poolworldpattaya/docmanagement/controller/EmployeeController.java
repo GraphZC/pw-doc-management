@@ -4,6 +4,7 @@ package com.poolworldpattaya.docmanagement.controller;
 import com.poolworldpattaya.docmanagement.entity.Employee;
 import com.poolworldpattaya.docmanagement.request.CreateEmployeeRequest;
 import com.poolworldpattaya.docmanagement.request.EditEmployeeRequest;
+import com.poolworldpattaya.docmanagement.response.EmployeeResponse;
 import com.poolworldpattaya.docmanagement.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,17 +32,18 @@ public class EmployeeController {
 
 	@GetMapping("/{id}")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	public ResponseEntity<Employee> getOneEmployee(@PathVariable UUID id) {
+	public ResponseEntity<EmployeeResponse> getOneEmployee(@PathVariable UUID id) {
 		Employee employee = employeeService.getEmployeeById(id);
 		if (employee == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(employee);
+		EmployeeResponse employeeResponse = new EmployeeResponse(employee.getId(), employee.getUsername(), employee.getName(), employee.getRoles());
+		return ResponseEntity.ok(employeeResponse);
 	}
 
 	@PostMapping("/")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	public ResponseEntity<Employee> createEmployee(@RequestBody CreateEmployeeRequest employee) {
+	public ResponseEntity<EmployeeResponse> createEmployee(@RequestBody CreateEmployeeRequest employee) {
 		Employee newEmployee = new Employee();
 		newEmployee.setName(employee.getName());
 		newEmployee.setUsername(employee.getUsername());
@@ -49,12 +52,13 @@ public class EmployeeController {
 
 		// Create
 		newEmployee = employeeService.createEmployee(newEmployee);
-		return ResponseEntity.created(null).body(newEmployee);
+		EmployeeResponse employeeResponse = new EmployeeResponse(newEmployee.getId(), newEmployee.getUsername(), newEmployee.getName(), newEmployee.getRoles());
+		return ResponseEntity.created(null).body(employeeResponse);
 	}
 
 	@PutMapping("/{id}")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	public ResponseEntity<Employee> updateEmployee (@PathVariable UUID id, @RequestBody EditEmployeeRequest employee) {
+	public ResponseEntity<EmployeeResponse> updateEmployee (@PathVariable UUID id, @RequestBody EditEmployeeRequest employee) {
 		// Find by id
 		Employee record = employeeService.getEmployeeById(id);
 		if (record == null) {
@@ -67,12 +71,13 @@ public class EmployeeController {
 
 		// Update
 		Employee updated = employeeService.updateEmployee(record);
-		return ResponseEntity.ok(updated);
+		EmployeeResponse employeeResponse = new EmployeeResponse(updated.getId(), updated.getUsername(), updated.getName(), updated.getRoles());
+		return ResponseEntity.ok(employeeResponse);
 	}
 
 	@DeleteMapping("/{id}")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	public ResponseEntity<Employee> deleteEmployee(@PathVariable UUID id) {
+	public ResponseEntity<EmployeeResponse> deleteEmployee(@PathVariable UUID id) {
 		// Find by id
 		Employee employee = employeeService.getEmployeeById(id);
 		if (employee == null) {
@@ -80,14 +85,18 @@ public class EmployeeController {
 		}
 		// Delete
 		Employee deleted = employeeService.deleteEmployee(id);
-		return ResponseEntity.ok(deleted);
+		EmployeeResponse employeeResponse = new EmployeeResponse(deleted.getId(), deleted.getUsername(), deleted.getName(), deleted.getRoles());
+		return ResponseEntity.ok(employeeResponse);
 	}
 
 	@GetMapping("/")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") })
-	public ResponseEntity<List<Employee>> getEmployees() {
+	public ResponseEntity<List<EmployeeResponse>> getEmployees() {
+		ArrayList<EmployeeResponse> employeeResponses = new ArrayList<>();
 		List<Employee> employees = employeeService.getAllEmployee();
-
-		return ResponseEntity.ok(employees);
+		for (Employee employee: employees) {
+			employeeResponses.add(new EmployeeResponse(employee.getId(), employee.getUsername(), employee.getName(), employee.getRoles()));
+		}
+		return ResponseEntity.ok(employeeResponses);
 	}
 }
