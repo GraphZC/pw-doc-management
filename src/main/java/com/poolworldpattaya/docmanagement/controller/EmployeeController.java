@@ -67,7 +67,7 @@ public class EmployeeController {
 
 		record.setName(employee.getName());
 		record.setPassword(employee.getPassword());
-		record.setRoles(employee.getRole());
+		record.setRoles(employee.getRoles());
 
 		// Update
 		Employee updated = employeeService.updateEmployee(record);

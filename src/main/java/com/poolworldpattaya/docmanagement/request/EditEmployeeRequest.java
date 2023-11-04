@@ -17,6 +17,6 @@ public class EditEmployeeRequest {
     private String password;
 
     @Column(nullable = false)
-    private String role;
+    private String roles;
 
 }
