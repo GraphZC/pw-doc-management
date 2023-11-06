@@ -1,12 +1,10 @@
 package com.poolworldpattaya.docmanagement.entity;
 
 import com.poolworldpattaya.docmanagement.enums.PoolType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -16,8 +14,18 @@ public class Pool {
     @GeneratedValue
     private UUID id;
 
+    @OneToOne(mappedBy = "pool")
+    private ServiceDay serviceDay;
+
     @Column(nullable = false)
     private UUID cutomerId;
+
+    @ManyToOne
+    @JoinColumn(name = "cutomerId", referencedColumnName = "id")
+    private Customer customer;
+
+    @OneToMany(mappedBy = "pool")
+    private List<Purchase> purchases;
 
     @Column(nullable = false)
     private String address;
@@ -33,6 +41,5 @@ public class Pool {
 
     @Column(nullable = false)
     private boolean inService;
-
 
 }

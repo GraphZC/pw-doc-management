@@ -1,11 +1,9 @@
 package com.poolworldpattaya.docmanagement.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -14,6 +12,9 @@ public class Employee {
     @Id
     @GeneratedValue
     private UUID id;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Order> orders;
 
     @Column(nullable = false)
     private String username;
