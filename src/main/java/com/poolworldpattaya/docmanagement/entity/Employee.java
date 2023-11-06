@@ -14,7 +14,7 @@ public class Employee {
     private UUID id;
 
     @OneToMany(mappedBy = "employee")
-    private List<Order> orders;
+    private List<CustomerOrder> customerOrders;
 
     @Column(nullable = false)
     private String username;

@@ -13,11 +13,10 @@ public class ServiceDay {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "poolId", referencedColumnName = "id")
     private Pool pool;
 
-    @Column(nullable = false)
-    private UUID poolid;
+//    @Column(nullable = false)
+//    private UUID poolid;
 
     @Column(nullable = false)
     private boolean monday;

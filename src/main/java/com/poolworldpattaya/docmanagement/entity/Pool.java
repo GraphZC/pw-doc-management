@@ -17,11 +17,10 @@ public class Pool {
     @OneToOne(mappedBy = "pool")
     private ServiceDay serviceDay;
 
-    @Column(nullable = false)
-    private UUID cutomerId;
+//    @Column(nullable = false)
+//    private UUID cutomerId;
 
     @ManyToOne
-    @JoinColumn(name = "cutomerId", referencedColumnName = "id")
     private Customer customer;
 
     @OneToMany(mappedBy = "pool")

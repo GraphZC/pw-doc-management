@@ -13,24 +13,20 @@ public class Purchase {
 	@GeneratedValue
 	private UUID id;
 
-	@Column(nullable = true)
-	private UUID productId;
-
 	@ManyToOne
-	@JoinColumn(name = "productId", nullable = true)
 	private Product product;
 
-	@Column(nullable = true)
-	private UUID poolId;
-
 	@ManyToOne
-	@JoinColumn(name = "poolId", nullable = true)
 	private Pool pool;
 
-	@Column(nullable = true)
-	private UUID orderId;
-
 	@ManyToOne
-	@JoinColumn(name = "orderId", nullable = true)
-	private Order order;
+	private CustomerOrder customerOrder;
+
+//	@Column(nullable = true)
+//	private UUID poolId;
+
+//	@Column(nullable = true)
+//	private UUID orderId;
+	@Column(nullable = false)
+	private double quantity;
 }

@@ -17,7 +17,7 @@ public class Customer {
     List<Pool> pools;
 
     @OneToMany(mappedBy = "customer")
-    List<Order> orders;
+    List<CustomerOrder> customerOrders;
 
     @Column(nullable = false)
     private String name;

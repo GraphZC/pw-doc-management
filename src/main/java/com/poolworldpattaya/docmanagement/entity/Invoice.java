@@ -14,7 +14,7 @@ public class Invoice {
 	private UUID id;
 
 	@OneToOne(mappedBy = "invoice")
-	private Order order;
+	private CustomerOrder order;
 
 	@Column(nullable = false)
 	private Date createdAt;
